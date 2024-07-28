@@ -6,15 +6,16 @@
 /*   By: yrodrigu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:49:03 by yrodrigu          #+#    #+#             */
-/*   Updated: 2024/07/28 16:46:50 by yrodrigu         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:03:54 by yrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 static void	action(int sig)
 {
-	static int	received = 0;
+	static int	received;
 
+	received = 0;
 	if (sig == SIGUSR1)
 		++received;
 	else
@@ -50,9 +51,10 @@ static void	send_message(int pid, char *str)
 		usleep(500);
 	}
 }
+
 int	ft_contain_char(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -63,6 +65,7 @@ int	ft_contain_char(char *str)
 	}
 	return (0);
 }
+
 int	main(int argc, char **argv)
 {
 	if (argc != 3 || !ft_strlen(argv[2]))
@@ -74,7 +77,7 @@ int	main(int argc, char **argv)
 	{
 		ft_putstr_fd("PID must be only a numeric value\n", 1);
 		return (1);
-	}	
+	}
 	ft_putstr_fd("Sent    : ", 1);
 	ft_putnbr_fd(ft_strlen(argv[2]), 1);
 	ft_putchar_fd('\n', 1);

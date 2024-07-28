@@ -6,16 +6,16 @@
 /*   By: yrodrigu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:02:34 by yrodrigu          #+#    #+#             */
-/*   Updated: 2024/07/26 13:00:35 by yrodrigu         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:03:13 by yrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <signal.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
 
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putchar_fd(char c, int fd);
