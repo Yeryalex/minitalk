@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrodrigu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:49:03 by yrodrigu          #+#    #+#             */
-/*   Updated: 2024/07/31 16:42:30 by yrodrigu         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:42:57 by yrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -34,11 +34,14 @@ static void	send_message(int pid, char *str)
 {
 	int		i;
 	char	c;
+	int		counter;
 
+	counter = 0;
 	while (*str)
 	{
 		i = 8;
 		c = *str++;
+		counter++;
 		while (i--)
 		{
 			if (c & 0x80)
@@ -48,11 +51,11 @@ static void	send_message(int pid, char *str)
 			c <<= 1;
 		}
 	}
+	ft_putnbr_fd(counter, 1);
+	ft_putchar_fd('\n', 1);
 	i = 8;
 	while (i--)
-	{
 		send_bit(pid, '0');
-	}
 }
 
 void	stop(int sig)
@@ -65,11 +68,15 @@ int	main(int argc, char **argv)
 {
 	struct sigaction	sa;
 
-	if (argc != 3 || !ft_strlen(argv[2]))
+	if (argc != 3)
 	{
 		ft_putstr_fd(" Command Line Usage: ./client [PID] [MESSAGE]\n", 2);
 		return (1);
 	}
+	ft_putstr_fd("Sent    : ", 1);
+	ft_putnbr_fd(ft_strlen(argv[2]), 1);
+	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("Received: ", 1);
 	sa.sa_handler = handle_ack;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
